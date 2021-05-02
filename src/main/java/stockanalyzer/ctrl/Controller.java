@@ -64,21 +64,17 @@ public class Controller {
             throw new yahooApiException("failed " + e.getMessage());
         }
     }
-
     public long countData(Stock stock) throws IOException {
         return stock.getHistory().size();
     }
-
     public double average(Stock stock) throws IOException {
 
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).average().orElse(0.0);
     }
-
     public double min(Stock stock) throws IOException {
 
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).min().orElse(0.0);
     }
-
     public double max(Stock stock) throws IOException {
 
         return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).max().orElse(0.0);
