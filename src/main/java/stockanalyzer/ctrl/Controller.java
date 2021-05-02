@@ -51,7 +51,7 @@ public class Controller {
                     break;
                 case "GOOGH":
                     stock = yahoofinance.YahooFinance.get("GOOG");
-                    stock.getHistory(stockcal, Interval.DAILY).forEach(System.out::println);
+                    stock.getHistory(stockcal,Interval.DAILY).forEach(System.out::println);
                     System.out.println("Data: "+ countData(stock));
                     System.out.println("Min: " + min(stock));
                     System.out.println("Max: " + max(stock));
@@ -66,9 +66,7 @@ public class Controller {
     }
 
     public long countData(Stock stock) throws IOException {
-
         return stock.getHistory().size();
-
     }
 
     public double average(Stock stock) throws IOException {
@@ -78,12 +76,12 @@ public class Controller {
 
     public double min(Stock stock) throws IOException {
 
-        return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).average().orElse(0.0);
+        return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).min().orElse(0.0);
     }
 
     public double max(Stock stock) throws IOException {
 
-        return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).average().orElse(0.0);
+        return stock.getHistory().stream().mapToDouble(q->q.getClose().doubleValue()).max().orElse(0.0);
     }
 
     public Object getData(String searchString) throws yahooApiException {
