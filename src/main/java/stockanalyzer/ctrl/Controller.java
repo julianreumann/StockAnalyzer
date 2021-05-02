@@ -34,7 +34,7 @@ public class Controller {
                     getData("GOOG");
                     break;
                 case "AMZNH":
-                    stock = yahoofinance.YahooFinance.get("");
+                    stock = yahoofinance.YahooFinance.get("AMZN");
                     stock.getHistory(stockcal,Interval.DAILY).forEach(System.out::println);
                     System.out.println("Data: "+ countData(stock));
                     System.out.println("Min: " + min(stock));
