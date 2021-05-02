@@ -15,42 +15,42 @@ public class UserInterface {
     public void getDataFromCtrl1() {
         try {
             ctrl.process("AMZN");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
     public void getDataFromCtrl2() {
         try {
             ctrl.process("TSLA");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
     public void getDataFromCtrl3() {
         try {
             ctrl.process("GOOG");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
     public void getDataFromCtrl4() {
         try {
             ctrl.process("AMZNH");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
     public void getDataFromCtrl5() {
         try {
             ctrl.process("TSLAH");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
     public void getDataFromCtrl6() {
         try {
             ctrl.process("GOOGH");
-        } catch (yahooApiException e) {
+        } catch (yahooApiException | IOException e) {
             e.printStackTrace();
         }
     }
