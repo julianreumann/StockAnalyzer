@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-
 public abstract class Downloader {
 
     public static final String DIRECTORY_DOWNLOAD = "./download/";
