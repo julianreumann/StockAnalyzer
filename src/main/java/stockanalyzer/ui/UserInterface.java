@@ -4,7 +4,13 @@ package stockanalyzer.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import stockanalyzer.download.Downloader;
+import stockanalyzer.download.ParallelDownloader;
+import stockanalyzer.download.SequentialDownloader;
 import stockanalyzer.exception.yahooApiException;
 import stockanalyzer.ctrl.Controller;
 
@@ -19,6 +25,7 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
     public void getDataFromCtrl2() {
         try {
             ctrl.process("TSLA");
@@ -26,6 +33,7 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
     public void getDataFromCtrl3() {
         try {
             ctrl.process("GOOG");
@@ -33,6 +41,7 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
     public void getDataFromCtrl4() {
         try {
             ctrl.process("AMZNH");
@@ -40,6 +49,7 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
     public void getDataFromCtrl5() {
         try {
             ctrl.process("TSLAH");
@@ -47,6 +57,7 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
     public void getDataFromCtrl6() {
         try {
             ctrl.process("GOOGH");
@@ -54,6 +65,27 @@ public class UserInterface {
             e.printStackTrace();
         }
     }
+
+    public void getDataFromCtrl7Down() {
+        long first;
+        long second;
+        Downloader pDown = new ParallelDownloader();
+        SequentialDownloader sqDown = new SequentialDownloader();
+
+        List<String> listATX = Arrays.asList("OMV.VI",
+                "EBS.VI", "DOC.VI", "SBO.VI", "RBI.VI", "VIG.VI", "TKA.VI", "VOE.VI", "FACC.VI", "ANDR.VI", "VER.VI",
+                "WIE.VI", "CAI.VI", "BG.VI", "POST.VI", "LNZ.VI", "UQA.VI", "SPI.VI", "ATS.VI", "IIA.VI");
+        first = System.currentTimeMillis();
+        ctrl.downloadTickers(listATX, sqDown);
+        second = System.currentTimeMillis();
+        System.out.printf("Sequent. Time: %dms\n",  first-second);
+        first = System.currentTimeMillis();
+        ctrl.downloadTickers(listATX, pDown);
+        second = System.currentTimeMillis();
+        System.out.printf("Parall. Time: %dms\n",  first-second);
+    }
+
+
     public void start() {
         Menu<Runnable> menu = new Menu<>("User Interfacx");
         menu.setTitel("Wählen Sie aus:");
@@ -63,6 +95,7 @@ public class UserInterface {
         menu.insert("d", "Choice 4 History AMZN:", this::getDataFromCtrl4);
         menu.insert("e", "Choice 5 History TSLA:", this::getDataFromCtrl5);
         menu.insert("f", "Choice 6 History GOOG:", this::getDataFromCtrl6);
+        menu.insert("g", "Download Tickers", this::getDataFromCtrl7Down);
         menu.insert("q", "Quit", null);
         Runnable choice;
         while ((choice = menu.exec()) != null) {

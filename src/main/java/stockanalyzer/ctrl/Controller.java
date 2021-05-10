@@ -1,5 +1,7 @@
 package stockanalyzer.ctrl;
 
+import stockanalyzer.download.Downloader;
+import stockanalyzer.download.SequentialDownloader;
 import yahooApi.YahooFinance;
 import yahooApi.beans.QuoteResponse;
 import yahooApi.beans.YahooResponse;
@@ -10,6 +12,7 @@ import yahoofinance.histquotes.Interval;
 import java.io.IOException;
 import java.util.*;
 import java.util.Calendar;
+import java.util.concurrent.ExecutionException;
 
 
 public class Controller {
@@ -57,6 +60,8 @@ public class Controller {
                     System.out.println("Max: " + max(stock));
                     System.out.println("Average: "+ average(stock));
                     break;
+
+
                 default:
                     System.out.println("ERROR");
             }
@@ -93,8 +98,10 @@ public class Controller {
 
     }
 
-
     public void closeConnection() {
+    }
 
+    public void downloadTickers(List<String> tickers, Downloader downloader) {
+     downloader.process(tickers);
     }
 }
